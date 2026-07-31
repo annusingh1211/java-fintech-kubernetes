@@ -6,7 +6,7 @@ COPY pom.xml .
 RUN --mount=type=cache,target=/root/.m2 \
     mvn -q dependency:go-offline
 
-COPY src ./src
+COPY src ./src/
 RUN --mount=type=cache,target=/root/.m2 \
     mvn -q clean package -DskipTests
 

@@ -5,7 +5,7 @@ metadata:
   namespace: banking
 
 spec:
-  replicas:
+  replicas: 1
   selector:
     matchLabels:
       app: backend
@@ -21,15 +21,15 @@ spec:
             - containerPort: 8000
           env:
             - name: DB_URL
-              value: jdbc:postgressql://postgres-svc.banking.svc.cluster.local:5432/bankingdb
+              value: jdbc:postgresql://postgres-svc.banking.svc.cluster.local:5432/bankingdb
             - name: DB_USERNAME
               valueFrom:
-                secretRef:
+                secretKeyRef:
                   name: postgres-secret
                   key: POSTGRES_USER
             - name: DB_PASSWORD
               valueFrom:
-                secretRef: 
+                secretKeyRef: 
                   name: postgres-secret
                   key: POSTGRES_PASSWORD
             - name: JWT_SECRET

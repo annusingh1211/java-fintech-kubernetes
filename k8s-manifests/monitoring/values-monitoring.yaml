@@ -43,28 +43,29 @@ alertmanager:
           resources:
             requests:
               storage: 2Gi
-            
+
   service:
     type: NodePort
     nodePort: 30093
+    
   config:
     global:
-      resolve_timeout: 5m
+      resolve_timeout: 5m    
     route:
-      receiver: 'discord-notification'
-      group_by: ['alertname']
+      receiver: 'discord-notifications'     
+      group_by: ['alertname']  
       group_wait: 30s
       group_interval: 5m
-      repeat_interval: 4h 
+      repeat_interval: 4h
       routes:
         - receiver: 'null'
           matchers:
-            - alertname =~ "Watchdog|kube.*Unreachable|Alertmanager.*Failed.*|etcd.*"
+            - alertname =~ "Watchdog|Kube.*Unreachable|Alertmanager.*Failed.*|etcd.*"
     receivers:
       - name: 'null'
       - name: 'discord-notifications'
         discord_configs:
-          - webhook_url: 'https://discord.com/api/webhooks/1534049058828713984/hNrXsmGBqrILwE4R9B5Xjiz_MTm-0MOw7_DvpQDzgvsAYQgUaa4RFUR-dkYM29yX_YIb'        
+          - webhook_url: 'https://discord.com/api/webhooks/1534049058828713984/hNrXsmGBqrILwE4R9B5Xjiz_MTm-0MOw7_DvpQDzgvsAYQgUaa4RFUR-dkYM29yX_YIb'
 
 additionalPrometheusRulesMap:
   custom-crashloop-rule:

@@ -10,7 +10,7 @@ RUN npm ci
 
 COPY frontend/ .
 
-ARG VITE_API_URL=http://api.bank.annusite.in/api
+ARG VITE_API_URL=http://api.bank.annusite.in:32758/api
 
 RUN npm run build
 
